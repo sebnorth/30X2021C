@@ -33,27 +33,38 @@ namespace KolejkaFIFO
                 throw new InvalidOperationException("Kolejka jest pełna");
             }
 
-
-            // Jeśli indeks osoby na końcu kolejki(q.Last) jest równy indeksowi końca tablicy(9) to…
-            if (q.Last == q.Kolejka.Length - 1) {
-
-                q.Kolejka[0] = os;
-                q.Last = 0;
-            }
-
             // Jeśli indeks osoby na końcu kolejki(q.Last) jest równy -1
-            if (q.Last == -1) {
+            if (q.Last == -1)
+            {
 
                 q.First = 0;
                 q.Last = 0;
                 q.Kolejka[0] = os;
             }
 
-            // Jeśli indeks osoby na końcu kolejki(q.Last) jest mniejszy niż indeks końca tablicy(9) to…
-            if (q.Last < q.Kolejka.Length - 1) {
+            else {
 
-                q.Kolejka[++q.Last] = os;
+                // Jeśli indeks osoby na końcu kolejki(q.Last) jest równy indeksowi końca tablicy(9) to…
+                if (q.Last == q.Kolejka.Length - 1)
+                {
+
+                    q.Kolejka[0] = os;
+                    q.Last = 0;
+                }
+
+
+                // Jeśli indeks osoby na końcu kolejki(q.Last) jest mniejszy niż indeks końca tablicy(9) to…
+                if (q.Last < q.Kolejka.Length - 1)
+                {
+
+                    q.Kolejka[++q.Last] = os;
+                }
+            
             }
+
+
+
+           
 
 
         }
@@ -63,14 +74,20 @@ namespace KolejkaFIFO
             return q.First == -1;
         }
 
-        //public static Osoba Dequeue(ref Queue q)
-        //{
-        //    if (Queue.IsEmpty(q))
-        //        throw new InvalidOperationException("Kolejka jest pusta");
-        //    Osoba tmp;
-        //    // TODO
-        //    return tmp;
-        //}
+        public static Osoba Dequeue(ref Queue q)
+        {
+            if (Queue.IsEmpty(q))
+                throw new InvalidOperationException("Kolejka jest pusta");
+            Osoba tmp = q.Kolejka[q.First];
+            // TODO
+            // case 1 jest dokładnie jeden klient
+            // case 2 jeśli początek kolejki nie jest na końcu tablicy to przesuń indeks q.First w prawo o jeden
+            // case 3 jeśli początek kolejki jest na końcu tablicy to przesuń indeks q.First na początek tablicy
+
+            // uwaga: tak jak był problem z klonem klienta tak przy usuwaniu możemy usunąć podwójnie
+            // odkomentować odpowiedni kod w kolmitecie kolejkowym
+            return tmp;
+        }
 
         public static void Clear(ref Queue q)
         {

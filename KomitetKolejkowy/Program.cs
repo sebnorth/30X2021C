@@ -37,7 +37,7 @@ namespace KomitetKolejkowy
                     case 'a':
                     case 'A':
                         Osoba.WprowadzOsobe(out tmp);
-                        // Queue.Enqueue(ref mojaKolejka, tmp);
+                        Queue.Enqueue(ref mojaKolejka, tmp);
                         break;
                     case 'b':
                     case 'B':
